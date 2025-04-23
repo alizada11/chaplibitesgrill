@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Testimonial Slideshow</title>
+ <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+ <style>
+  body {
+   background: linear-gradient(to right, #ff7e5f, #feb47b);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+  }
+
+  .carousel-container {
+   width: 60%;
+  }
+
+  .testimonial-card {
+   background-color: white;
+   border-radius: 10px;
+   padding: 20px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   text-align: center;
+  }
+
+  .testimonial-card h5 {
+   margin-top: 15px;
+  }
+
+  .testimonial-card p {
+   color: #888;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+   background-color: white;
+   border-radius: 50%;
+   width: 40px;
+   height: 40px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+   background-color: black;
+  }
+ </style>
+</head>
+
+<body>
+
+ <div id="testimonialCarousel" class="carousel slide carousel-container" data-ride="carousel">
+  <div class="carousel-inner">
+   <div class="carousel-item active">
+    <div class="testimonial-card">
+     <blockquote>
+      <p>Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.</p>
+     </blockquote>
+     <div>
+      <span>⭐⭐⭐⭐⭐</span>
+     </div>
+     <h5>Merian Maheta</h5>
+     <p>Owner Of Xyz Company</p>
+    </div>
+   </div>
+   <div class="carousel-item">
+    <div class="testimonial-card">
+     <blockquote>
+      <p>Vestibulum Ante Ipsum Primis in Faucibus Orci Luctus Et.</p>
+     </blockquote>
+     <div>
+      <span>⭐⭐⭐⭐⭐</span>
+     </div>
+     <h5>John Doe</h5>
+     <p>CEO of ABC Ltd.</p>
+    </div>
+   </div>
+   <div class="carousel-item">
+    <div class="testimonial-card">
+     <blockquote>
+      <p>Phasellus Euismod Nulla Et Mollis Varius.</p>
+     </blockquote>
+     <div>
+      <span>⭐⭐⭐⭐⭐</span>
+     </div>
+     <h5>Jane Smith</h5>
+     <p>Founder of XYZ Corp.</p>
+    </div>
+   </div>
+  </div>
+  <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  </a>
+  <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+   <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </a>
+ </div>
+
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
