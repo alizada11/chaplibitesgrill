@@ -61,48 +61,6 @@ class Pages extends BaseController
 
             $email->setSubject('New Catering Request');
 
-            $message = "<h2>New Catering Request</h2>";
-            foreach ($form as $key => $value) {
-                $message .= "<p><strong>" . ucfirst($key) . ":</strong> " . esc($value) . "</p>";
-            }
-
-            $email->setMessage($message);
-
-            if ($email->send()) {
-                return redirect()->to('/catering')->with('success', 'Email sent successfully!');
-            } else {
-                return redirect()->back()->with('error', 'Email could not be sent.');
-            }
-        }
-        if ($this->request->getMethod() === 'GET') {
-
-            return view('catering');
-        }
-    }
-    public function gallery()
-    {
-        $model = new GalleryModel();
-
-        $perPage = 8;
-        $data['gallery'] = $model->paginate($perPage);
-        $data['pager'] = $model->pager;
-
-        return view('gallery', $data);
-    }
-    public function contact()
-    {
-        if ($this->request->getMethod() === 'POST') {
-
-            $form = $this->request->getPost('form_fields');
-
-            $email = \Config\Services::email();
-
-            $email->setTo('notification@chaplibitesgrill.com
-');
-            $email->setFrom('noreply@yourdomain.com', 'Catering Website');
-
-            $email->setSubject('New Catering Request');
-
             $message = '
 <!DOCTYPE html>
 <html>
@@ -173,8 +131,122 @@ class Pages extends BaseController
             }
         }
         if ($this->request->getMethod() === 'GET') {
-            return view('contact');
+
+            return view('catering');
         }
+    }
+    public function gallery()
+    {
+        $model = new GalleryModel();
+
+        $perPage = 8;
+        $data['gallery'] = $model->paginate($perPage);
+        $data['pager'] = $model->pager;
+
+        return view('gallery', $data);
+    }
+    public function contact()
+    {
+        if ($this->request->getMethod() === 'POST') {
+            $data = $this->request->getPost();
+
+            $email = \Config\Services::email();
+
+            // Setup email
+            $email->setTo('notification@chaplibitesgrill.com');
+            $email->setFrom('notification@chaplibitesgrill.com', 'Chapli Bites Grill Website');
+
+            $email->setSubject('📬 New Contact Message - ' . esc($data['subject']));
+
+            // Format email content nicely
+            $message = '
+<html>
+<head>
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: #f8f9fa;
+      padding: 30px;
+      color: #212529;
+    }
+    .card {
+      background-color: #ffffff;
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .card h2 {
+      color: #d9230f;
+      margin-bottom: 20px;
+      font-size: 24px;
+      border-bottom: 1px solid #dee2e6;
+      padding-bottom: 10px;
+    }
+    .info-group {
+      margin-bottom: 15px;
+    }
+    .label {
+      font-weight: 600;
+      color: #495057;
+    }
+    .value {
+      margin: 5px 0 0 0;
+    }
+    .footer {
+      font-size: 12px;
+      color: #6c757d;
+      margin-top: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>New Contact Form Submission</h2>
+    
+    <div class="info-group">
+      <div class="label">Name:</div>
+      <div class="value">' . esc($data['name']) . '</div>
+    </div>
+
+    <div class="info-group">
+      <div class="label">Email:</div>
+      <div class="value">' . esc($data['email']) . '</div>
+    </div>
+
+    <div class="info-group">
+      <div class="label">Subject:</div>
+      <div class="value">' . esc($data['subject']) . '</div>
+    </div>
+
+    <div class="info-group">
+      <div class="label">Message:</div>
+      <div class="value">' . nl2br(esc($data['message'])) . '</div>
+    </div>
+
+    <div class="footer">
+      Sent from the Chapli Bites Grill website contact form
+    </div>
+  </div>
+</body>
+</html>';
+
+
+            $email->setMessage($message);
+            $email->setMailType('html');
+
+            // Send
+            if ($email->send()) {
+                return redirect()->to('/contact')->with('success', 'Thanks! Your message was sent.');
+            } else {
+                return redirect()->to('/contact')->with('error', 'Oops! We couldn’t send your message.');
+            }
+        }
+
+        return view('contact');
         // 
         // return redirect()->back();
     }

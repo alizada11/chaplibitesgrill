@@ -24,9 +24,15 @@ use CodeIgniter\Database\BaseUtils;
   <div class="row g-4">
    <!-- Contact Form -->
    <div class="col-lg-6">
+    <?php if (session()->getFlashdata('success')): ?>
+     <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+    <?php elseif (session()->getFlashdata('error')): ?>
+     <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+    <?php endif; ?>
+
     <h2>Get in Touch</h2>
     <p class="mt-3">Fill out the form below, and we’ll get back to you as soon as possible.</p>
-    <form action="<?= base_url('/contact/submit') ?>" method="POST" class="mt-4">
+    <form action="<?= base_url('/contact') ?>" method="POST" class="mt-4">
      <?= csrf_field() ?>
      <div class="mb-3">
       <label for="name" class="form-label">Name</label>

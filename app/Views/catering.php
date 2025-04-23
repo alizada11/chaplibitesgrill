@@ -39,7 +39,7 @@
    </div>
   <?php endif; ?>
   <h3 class="mb-3">Request Catering Info</h3>
-  <form method="post" name="Catering" action="<?= base_url('contact') ?>">
+  <form method="post" name="Catering" action="<?= base_url('catering') ?>">
    <?= csrf_field() ?> <!-- CSRF protection -->
 
    <input type="hidden" name="post_id" value="181">
