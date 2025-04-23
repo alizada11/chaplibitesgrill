@@ -49,7 +49,35 @@ class Pages extends BaseController
 
     public function catering()
     {
-        return view('catering');
+        if ($this->request->getMethod() === 'POST') {
+
+            $form = $this->request->getPost('form_fields');
+
+            $email = \Config\Services::email();
+
+            $email->setTo('notification@chaplibitesgrill.com
+');
+            $email->setFrom('noreply@yourdomain.com', 'Catering Website');
+
+            $email->setSubject('New Catering Request');
+
+            $message = "<h2>New Catering Request</h2>";
+            foreach ($form as $key => $value) {
+                $message .= "<p><strong>" . ucfirst($key) . ":</strong> " . esc($value) . "</p>";
+            }
+
+            $email->setMessage($message);
+
+            if ($email->send()) {
+                return redirect()->to('/catering')->with('success', 'Email sent successfully!');
+            } else {
+                return redirect()->back()->with('error', 'Email could not be sent.');
+            }
+        }
+        if ($this->request->getMethod() === 'GET') {
+
+            return view('catering');
+        }
     }
     public function gallery()
     {
@@ -64,35 +92,91 @@ class Pages extends BaseController
     public function contact()
     {
         if ($this->request->getMethod() === 'POST') {
+
+            $form = $this->request->getPost('form_fields');
+
             $email = \Config\Services::email();
 
-            $name = $this->request->getPost('name');
-            $senderEmail = $this->request->getPost('email');
-            $message = $this->request->getPost('message');
+            $email->setTo('notification@chaplibitesgrill.com
+');
+            $email->setFrom('noreply@yourdomain.com', 'Catering Website');
 
-            $email->setTo('jawadalizada1@gmail.com');
-            $email->setFrom($senderEmail, $name);
             $email->setSubject('New Catering Request');
-            $email->setMessage("
-            <h2>New Catering Inquiry</h2>
-            <p><strong>Name:</strong> {$name}</p>
-            <p><strong>Email:</strong> {$senderEmail}</p>
-            <p><strong>Message:</strong><br>{$message}</p>
-        ");
+
+            $message = '
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #212529;
+      padding: 20px;
+    }
+    .email-container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      border-radius: 6px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #0d6efd;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #dee2e6;
+    }
+    th {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+  
+
+    <h2>New Catering Request</h2>
+    <p>You received a new catering form submission. Here are the details:</p>
+    <table>
+      <tr><th>Field</th><th>Value</th></tr>';
+
+            foreach ($form as $key => $value) {
+                $fieldName = ucfirst(str_replace('_', ' ', $key));
+                $message .= '<tr><td>' . esc($fieldName) . '</td><td>' . esc($value) . '</td></tr>';
+            }
+
+            $message .= '
+    </table>
+    <p style="margin-top: 20px;">Regards,<br><strong>Chapli Bites Grill</strong></p>
+  </div>
+</body>
+</html>';
+
+
+            $email->setMessage($message);
 
             if ($email->send()) {
-                return redirect()->back()->with('success', 'Your request has been sent successfully!');
+
+                return redirect()->to('/catering')->with('success', 'Thank you! Your catering request has been submitted.');
             } else {
-                // Show detailed email error
-                $debugger = $email->printDebugger(['headers', 'subject', 'body']);
-                echo "<pre>";
-                print_r($debugger);
-                echo "</pre>";
-                exit; // Stop script to view the debugger output
+                return redirect()->back()->with('error', 'Email could not be sent.');
             }
         }
-
-        return view('contact');
+        if ($this->request->getMethod() === 'GET') {
+            return view('contact');
+        }
+        // 
+        // return redirect()->back();
     }
 
 

@@ -87,16 +87,38 @@ class Auth extends Controller
   }
 
   $token = bin2hex(random_bytes(50));
+
+  // Save token to database
   $db = db_connect();
   $db->table('password_reset_tokens')->insert([
    'email' => $email,
    'token' => $token,
+   'created_at' => date('Y-m-d H:i:s'), // Optional, for expiration
   ]);
 
+  // Generate reset link
   $resetLink = base_url("/reset-password/{$token}");
-  // For now, just echo. Later, send email.
-  echo "Password reset link: <a href='$resetLink'>$resetLink</a>";
-  exit;
+
+  // Send email]
+  $emailService = \Config\Services::email();
+
+  $emailService->setTo($email);
+  $emailService->setFrom('notification@chaplibitesgrill.com
+
+', 'Chaplibites Grill');
+
+  $emailService->setSubject('Reset Your Password');
+  $emailService->setMessage("
+    <h3>Password Reset Request</h3>
+    <p>Click the link below to reset your password:</p>
+    <a href='$resetLink'>$resetLink</a>
+");
+
+  if (!$emailService->send()) {
+   return redirect()->back()->with('error', $emailService->printDebugger(['headers', 'subject', 'body']));
+  }
+
+  return redirect()->back()->with('success', 'Reset link has been sent to your email.');
  }
 
  public function resetPassword($token)

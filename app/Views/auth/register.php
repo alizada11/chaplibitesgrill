@@ -5,6 +5,8 @@
  <title>Register</title>
  <!-- Bootstrap 5 CSS -->
  <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
+ <link rel="icon" type="image/x-icon" href="<?= base_url('favicon.png') ?>">
+
 </head>
 
 <body class="bg-light d-flex align-items-center justify-content-center vh-100">
