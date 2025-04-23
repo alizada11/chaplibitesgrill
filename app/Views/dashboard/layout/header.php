@@ -19,7 +19,7 @@
 <body>
 
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-  <a class="navbar-brand" href="/dashboard"><i class="fas fa-utensils me-2"></i>Fast Food CMS</a>
+  <a class="navbar-brand" href="/dashboard"><i class="fas fa-utensils me-2"></i>Chaplibites Grill</a>
   <div class="ms-auto">
    <a href="/logout" class="btn btn-outline-light btn-sm"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
   </div>
