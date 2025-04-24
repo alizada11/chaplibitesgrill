@@ -9,6 +9,7 @@
  <a href="/admin/how-it-works"><i class="fas fa-question me-2"></i>how it works</a>
  <a href="/admin/testimonials"><i class="fas fa-quote-left me-2"></i>Testimonial</a>
  <a href="/admin/about"><i class="fas fa-info-circle me-2"></i>About Page</a>
+ <a href="/admin/contact-page"><i class="fas fa-phone-circle me-2"></i>Contact Page</a>
 </div>
 
 <div class="col-md-10 p-4">

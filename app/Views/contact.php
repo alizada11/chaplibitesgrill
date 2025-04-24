@@ -5,16 +5,16 @@ use CodeIgniter\Database\BaseUtils;
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('content') ?>
-<main class="container-fluid py-5 main">
+<main class="container py-5 main">
  <!-- Hero Section -->
  <section class="container-fluid text-center text-lg-start py-5">
   <div class="row align-items-center">
    <div class="col-lg-6">
-    <h1>Contact Chaplibites</h1>
-    <p class="lead mt-3">We’d love to hear from you! Reach out with questions, feedback, or to place an order.</p>
+    <h1><?= esc($contact['hero_title'] ?? 'Contact Us') ?></h1>
+    <p class="lead mt-3"><?= esc($contact['hero_subtitle'] ?? '') ?></p>
    </div>
    <div class="col-lg-6 text-center">
-    <img src="<?= base_url('uploads/home/home-banner.png') ?>" alt="Chaplibites customer service" class="img-fluid rounded-3">
+    <img src="<?= base_url(esc($contact['hero_image'] ?? '')) ?>" alt="Chaplibites customer service" class="img-fluid rounded-3">
    </div>
   </div>
  </section>
@@ -32,7 +32,7 @@ use CodeIgniter\Database\BaseUtils;
 
     <h2>Get in Touch</h2>
     <p class="mt-3">Fill out the form below, and we’ll get back to you as soon as possible.</p>
-    <form action="<?= base_url('/contact') ?>" method="POST" class="mt-4">
+    <form action="<?= base_url('/contact') ?>" method="POST" class="mt-4 shadow p-3 rounded">
      <?= csrf_field() ?>
      <div class="mb-3">
       <label for="name" class="form-label">Name</label>
@@ -55,20 +55,20 @@ use CodeIgniter\Database\BaseUtils;
    </div>
    <!-- Contact Info -->
    <div class="col-lg-6">
-    <h2>Contact Information</h2>
-    <p class="mt-3">We’re here to assist you with your orders, inquiries, or feedback.</p>
+    <h2><?= esc($contact['heading'] ?? 'Contact Us') ?></h2>
+    <p class="mt-3"><?= esc($contact['subheading'] ?? '') ?></p>
     <ul class="list-unstyled mt-4">
      <li class="mb-3">
       <img src="<?= base_url('icons/phone.svg') ?>" alt="Phone icon" class="social-icons me-2">
-      <strong>Phone:</strong> +91 123-456-7890
+      <strong>Phone:</strong><?= esc($contact['phone'] ?? '') ?>
      </li>
      <li class="mb-3">
       <img src="<?= base_url('icons/send.svg') ?>" alt="Email icon" class="social-icons me-2">
-      <strong>Email:</strong> <a href="mailto:info@chaplibites.com">info@chaplibites.com</a>
+      <strong>Email:</strong> <a href="mailto:<?= esc($contact['email'] ?? '') ?>"><?= esc($contact['email'] ?? '') ?></a>
      </li>
      <li class="mb-3">
       <img src="<?= base_url('icons/location.svg') ?>" alt="Location icon" class="social-icons me-2">
-      <strong>Address:</strong> 123 Veggie Lane, Food City, Omman
+      <strong>Address:</strong> <?= nl2br(esc($contact['address'] ?? '')) ?>
      </li>
     </ul>
 

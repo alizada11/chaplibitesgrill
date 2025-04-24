@@ -5,7 +5,7 @@ use CodeIgniter\Database\BaseUtils;
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('content') ?>
-<main class="container-fluid py-5 main">
+<main class="container py-5 main">
  <!-- Hero Section -->
  <section class="container-fluid text-center text-lg-start py-5">
   <div class="row align-items-center">
@@ -29,14 +29,14 @@ use CodeIgniter\Database\BaseUtils;
 
  <!-- Our Story Section -->
  <section class="container py-5">
-  <div class="row g-4">
+  <div class="row about-story g-4">
    <div class="col-lg-6 order-lg-2">
     <?php
     if (!$about['story_image']) {
     ?>
      <img src="<?= base_url('uploads/home/story1.jpg') ?>" alt="Chaplibites kitchen" class="img-fluid rounded-3">
     <?php } else { ?>
-     <img src="<?= base_url($about['story_image']) ?>" alt="Story Image" class="img-fluid rounded-3">
+     <img src="<?= base_url($about['story_image']) ?>" alt="Story Image" class="story-image img-fluid rounded-3">
 
     <?php } ?>
    </div>

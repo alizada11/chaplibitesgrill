@@ -538,6 +538,15 @@ body.homepage::after {
 .gallery-card:hover img {
   transform: scale(1.1);
 }
+.story-image {
+  max-height: 300px;
+  width: 100%;
+  object-fit: contain;
+}
+.about-story {
+  align-items: center;
+  justify-content: center;
+}
 .nav-btn {
   position: absolute;
   top: 50%;

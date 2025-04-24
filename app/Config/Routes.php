@@ -63,6 +63,9 @@ $routes->group(
   $routes->get('gallery', 'Admin\GalleryController::index');
   $routes->post('gallery/upload', 'Admin\GalleryController::upload');
   $routes->get('gallery/delete/(:num)', 'Admin\GalleryController::delete/$1');
+  // contact page
+  $routes->get('contact-page', 'Admin\ContactPageController::index');
+  $routes->post('contact-page/update', 'Admin\ContactPageController::update');
  }
 );
 
